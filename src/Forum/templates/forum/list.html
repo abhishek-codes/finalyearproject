@@ -1,0 +1,15 @@
+{% extends 'base.html' %}
+{% block title %}Forum{% endblock %}
+{% block content %}
+{% if messages %}
+ {% include 'toast_messages.html' with toast_messages=messages %}
+{% endif %}
+<div class="row col-12 col-md-10 mb-3 mx-auto">
+    <a href="create-post" class="btn btn-primary btn-lg active" role="button" aria-pressed="true">Create new Post</a>
+</div>
+    <div class='row'>
+        {% for object in object_list %}
+            {% include 'forum/list_inline.html' with  post_detail=object %}
+        {% endfor %}
+    </div>
+{% endblock %}

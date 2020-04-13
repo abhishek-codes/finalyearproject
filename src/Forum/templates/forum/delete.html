@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Delete{% endblock %}
+{% block content %}
+<div class="card col-12 col-md-10 mb-3 mx-auto">
+<form action="" method="POST">
+    {% csrf_token %}
+    <h3>Are you sure you want to Delete</h3>
+    <p> {{ object.title }}</p>  
+    <button type="submit" class="btn btn-danger">Yes</button>  
+</form>
+</div>
+{% endblock %}

@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block title %}Search{% endblock %}
+{% block content %}
+<div class="row">
+    <h4>You search for {{ query }}</h4>
+</div>
+    <div class='row'>
+        {% for object in object_list %}
+            {% include 'forum/list_inline.html' with  post_detail=object %}
+        {% endfor %}
+    </div>
+{% endblock %}
