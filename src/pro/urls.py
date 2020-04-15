@@ -26,6 +26,8 @@ urlpatterns = [
     path('search/',search_views),
     # path('post-create',create_post_view),
     path('admin/', admin.site.urls),
+    path('accounts/', include('allauth.urls')),
+    path('comments/',include('comments.urls')),
 ]
 
 if settings.DEBUG:

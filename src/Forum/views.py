@@ -6,7 +6,7 @@ from django.contrib import messages
 from comments.forms import CommentForm
 from comments.models import Comment
 from django.contrib.contenttypes.models import ContentType
-from django.http import HttpResponseRedirect
+from django.http import HttpResponseRedirect,HttpResponse,Http404
 
 
 # Create your views here.
@@ -26,11 +26,15 @@ def detail_post_view(request,slug):
     }
     comment_form = CommentForm(request.POST or None,initial=initial_data)
     if comment_form.is_valid():
+        # print(request.user.is_authenticated)
+        if not request.user.is_authenticated:
+            return render(request,'login_required.html')
         c_type = comment_form.cleaned_data.get('content_type')
         content_type = ContentType.objects.get(model=c_type)
         object_id = comment_form.cleaned_data.get('object_id')
         content = comment_form.cleaned_data.get('content')
         parent_obj = None
+        # print(object_id)
         try:
             parent_id = int(request.POST.get('parent_id'))
         except:
@@ -39,14 +43,17 @@ def detail_post_view(request,slug):
             parent_qs = Comment.objects.filter(id=parent_id)
             if parent_qs.exists() and parent_qs.count()==1:
                 parent_obj = parent_qs.first()
-        # print(parent_id,parent_obj) 
-        Comment.objects.get_or_create(
-            user=request.user,
-            content_type=content_type,
-            object_id=object_id,
-            content=content,
-            parent=parent_obj)
-        messages.success(request,'Successfully Commented')
+        # print(parent_id,parent_obj)
+        try: 
+            Comment.objects.get_or_create(
+                user=request.user,
+                content_type=content_type,
+                object_id=object_id,
+                content=content,
+                parent=parent_obj)
+            messages.success(request,'Successfully Commented')
+        except:
+            messages.error(request,"Try Again")
         comment_form = CommentForm()
         return HttpResponseRedirect(obj.get_absolute_url())
     context = { 
@@ -68,18 +75,21 @@ def edit_post_view(request,slug):
     return render(request,template_name,context)
 
 def delete_post_view(request,slug):
-    print("###object")
+    # print("###object")second-title-11
     obj = get_object_or_404(Post,slug=slug)
-    print("###object",obj)
-    template_name = "forum/delete.html"
+    # print("###object",obj)
+    template_name = "delete.html"
     if request.method == "POST":
         obj.delete()
         messages.success(request,'Successfully Deleted')
         return redirect('/forum')
-    context = { "object":obj}
+    context = { "object":obj.title}
     return render(request,template_name,context)
 
 def create_post_view(request):
+    print(request,request.user,request.user.is_authenticated)
+    if not request.user.is_authenticated:
+        return render(request,'login_required.html')
     form = PostModelForm(request.POST or None,request.FILES or None)
     context = {"form" : form }
     if form.is_valid():

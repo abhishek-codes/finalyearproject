@@ -1,12 +1,12 @@
-{% extends 'base.html' %}
+{% extends 'forum/forum_base.html' %}
 {% load crispy_forms_tags %}
 {% block title %}Detail{% endblock %}
-{% block content %}
+{% block forum %}
 {% if messages %}
- {% include 'toast_messages.html' with toast_messages=messages %}
+ {% include 'messages.html' with toast_messages=messages %}
 {% endif %}
-<div class='col-12 col-md-10 mb-3 mx-auto'>
-    <div class='card border border-warning text-dark'>
+<div class='col-12 col-md-10 mb-3'>
+    <div class='card border text-dark'>
         <h4 class='card-header'>@{{ post_detail.user }}</h4>
        <div class='card-body'>
            {% if post_detail.image %}
@@ -41,17 +41,24 @@
                 <div class="card-body">
                 <h5 class="card-title">@{{ comment.user }} | <small>{{ comment.timestamp|timesince }} ago</small></h5>
                 <p class="card-text">{{ comment.content }}</p>
+                {% if comment.user == request.user %}
+                <a href="{{ comment.get_delete_url }}" role="button" style="float: right;" aria-pressed="true">DELETE</a>
+                {% endif %}
                 <p class="card-text">{% if comment.children.count > 0 %}{% if comment.children.count == 1 %}
-                    1 Reply | {% else %}{{comment.children.count}} Replies | {% endif %}{% endif %}<a class='comment-reply-btn' href="">Reply</a></p>
+                    1 Reply | {% else %}{{comment.children.count}} Replies | {% endif %}{% else %}No Reply | {% endif %}<a class='comment-reply-btn' href="">Reply</a></p>
                 <div class="comment-reply" style="display: none;">
                     <h5 class='card-header'>Reply:</h5>
                     {% for child in comment.children %}
                     <div class="card-body">
                         <h5 class="card-title">@{{ child.user }} | <small>{{ child.timestamp|timesince }} ago</small></h5>
                         <p class="card-text">{{ child.content }}</p>
+                        {% if child.user == request.user %}
+                        <a href="{{ child.get_delete_url }}" role="button" style="float: right;" aria-pressed="true">DELETE</a>
+                        {% endif %}
                     </div>
                     {% endfor %}
                     <div class="card-body">
+                        <h6 class='card-header'>Add Reply:</h6>
                         <form action="" method="POST">{% csrf_token %}
                             {{ comment_form|crispy }}
                             <input type="hidden" name="parent_id" value="{{ comment.id }}">

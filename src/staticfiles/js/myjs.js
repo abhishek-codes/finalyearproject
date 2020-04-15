@@ -4,4 +4,5 @@ $(document).ready(function(){
         event.preventDefault();
         $(this).parent().next(".comment-reply").fadeToggle();
     })
+    $('.modal').modal('show');
 })

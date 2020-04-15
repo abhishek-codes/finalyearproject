@@ -1,0 +1,14 @@
+{% extends 'base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}{% endblock %}
+{% block content %}
+<div class="row">
+    <div class="col-sm-12 col-lg-3">
+        {% include "forum/sidebar.html" %}
+    </div>
+    <div class="col-sm-12 col-lg-9">
+        {% block forum %}
+        {% endblock %}
+    </div>
+</div>
+{% endblock %}
