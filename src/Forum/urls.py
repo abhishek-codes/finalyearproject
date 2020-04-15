@@ -5,11 +5,13 @@ from .views import (
     detail_post_view,
     edit_post_view,
     list_post_view,
+    my_post_view,
 )
 
 urlpatterns = [
     path('',list_post_view),
     path('create-post',create_post_view),
+    path('my-posts',my_post_view),
     path('<str:slug>',detail_post_view),
     path('<str:slug>/edit',edit_post_view),
     path('<str:slug>/delete',delete_post_view),

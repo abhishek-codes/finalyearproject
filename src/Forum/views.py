@@ -16,6 +16,12 @@ def list_post_view(request):
     context = {'object_list' : qs}
     return render(request,template,context)
 
+def my_post_view(request):
+    qs = Post.objects.filter(user=request.user)
+    template = 'forum/list.html'
+    context = {'object_list' : qs}
+    return render(request,template,context)
+
 def detail_post_view(request,slug):
     obj = get_object_or_404(Post,slug=slug)
     comments = obj.comments

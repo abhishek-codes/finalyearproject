@@ -8,7 +8,7 @@ def search_views(request):
     user = None
     if request.user.is_authenticated:
         user = request.user
-        context = { "query": query}
+    context = { "query": query}
     if query is not None:
         SearchQuery.objects.create(user=user,query=query)
         result_post = Post.objects.search(query=query)

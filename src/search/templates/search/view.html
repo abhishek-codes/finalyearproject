@@ -1,12 +1,16 @@
 {% extends 'forum/forum_base.html' %}
 {% block title %}Search{% endblock %}
 {% block forum %}
-<div class="row">
+<div>
     <h4>You search for {{ query }}</h4>
 </div>
+    {% if object_list %}
     <div class='row'>
         {% for object in object_list %}
             {% include 'forum/list_inline.html' with  post_detail=object %}
         {% endfor %}
     </div>
+    {% else %}
+    <h3>Result not found</h3>
+    {% endif %}
 {% endblock %}
