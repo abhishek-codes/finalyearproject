@@ -27,7 +27,7 @@ SECRET_KEY = '#52j&nkv(h)3fldm-8o^&oiqpuxq%aykw@q!gyo-n@v#-py!42'
 # DEBUG can be True/False or 1/0
 DEBUG = int(os.environ.get('DEBUG', default=1)) 
 
-ALLOWED_HOSTS = ['finalproject2020.herokuapp.com']
+ALLOWED_HOSTS = ['abhishek73knp.pythonanywhere.com/']
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
