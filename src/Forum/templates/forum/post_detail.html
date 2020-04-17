@@ -19,8 +19,8 @@
            </p>
            {% if request.user == post_detail.user %}
             <div style="float:right">
-                <a href="{{ post_detail.get_edit_url }}" role="button" aria-pressed="true">EDIT</a>
-                <a href="{{ post_detail.get_delete_url }}" role="button" aria-pressed="true">DELETE</a>
+                <a href="{{ post_detail.get_edit_url }}" data-toggle="tooltip" title="EDIT" role="button" aria-pressed="true"><i class="fas fa-edit"></i></a>
+                <a href="{{ post_detail.get_delete_url }}" data-toggle="tooltip" title="DELETE" role="button" aria-pressed="true"><i class="fas fa-trash"></i></a>
             </div>
             {% endif %}
             <br>

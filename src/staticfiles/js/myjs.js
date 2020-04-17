@@ -5,4 +5,5 @@ $(document).ready(function(){
         $(this).parent().next(".comment-reply").fadeToggle();
     })
     $('.modal').modal('show');
+    $('[data-toggle="tooltip"]').tooltip();
 })

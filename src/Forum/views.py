@@ -17,6 +17,8 @@ def list_post_view(request):
     return render(request,template,context)
 
 def my_post_view(request):
+    if not request.user.is_authenticated:
+        return render(request,'login_required.html')
     qs = Post.objects.filter(user=request.user)
     template = 'forum/list.html'
     context = {'object_list' : qs}

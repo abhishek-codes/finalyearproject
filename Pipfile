@@ -11,6 +11,7 @@ django = "==2.2"
 pillow = "*"
 django-crispy-forms = "*"
 django-allauth = "*"
+gunicorn = "*"
 
 [requires]
 python_version = "3.6"
