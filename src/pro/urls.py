@@ -18,12 +18,14 @@ from django.urls import path,include
 from .views import (home_page)
 from django.conf import settings
 from search.views import search_views
-# from Forum.views import create_post_view
+from Forum.views import create_post_view,my_post_view
 
 urlpatterns = [
     path('',home_page),
     path('forum/',include('Forum.urls')),
     path('search/',search_views),
+    path('create-post',create_post_view),
+    path('my-posts',my_post_view),
     # path('post-create',create_post_view),
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),
