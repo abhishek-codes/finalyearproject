@@ -27,9 +27,13 @@ SECRET_KEY = '#52j&nkv(h)3fldm-8o^&oiqpuxq%aykw@q!gyo-n@v#-py!42'
 # DEBUG can be True/False or 1/0
 DEBUG = int(os.environ.get('DEBUG', default=1)) 
 
+<<<<<<< HEAD
 
 ALLOWED_HOSTS = ['*']
 
+=======
+ALLOWED_HOSTS = ['*']
+>>>>>>> d0632f502c6ecf87980709196e36e0442c18bade
 
 EMAIL_USE_TLS = True
 EMAIL_HOST = 'smtp.gmail.com'
