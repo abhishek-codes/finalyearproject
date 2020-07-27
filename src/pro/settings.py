@@ -31,10 +31,16 @@ DEBUG = int(os.environ.get('DEBUG', default=1))
 ALLOWED_HOSTS = ['*']
 
 #write email and password
-EMAIL_USE_TLS = True
-EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'example@gmail.com'
-EMAIL_HOST_PASSWORD = 'mypassword'
+# EMAIL_USE_TLS = True
+# EMAIL_HOST = 'smtp.gmail.com'
+# EMAIL_HOST_USER = 'example@gmail.com'
+# EMAIL_HOST_PASSWORD = 'mypassword'
+# EMAIL_PORT = 587
+
+EMAIL_USE_TLS = False
+EMAIL_HOST = 'in-v3.mailjet.com'
+EMAIL_HOST_USER = '41558baf0dd295354e06e7437f3b0bd4'
+EMAIL_HOST_PASSWORD = '1905f565bb4022ab4a0a2aeb8adbca55'
 EMAIL_PORT = 587
 
 # Application definition
