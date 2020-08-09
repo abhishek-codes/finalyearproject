@@ -1,0 +1,51 @@
+{% extends 'forum/forum_base.html' %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+{% block title %}{% endblock %}
+{% block head %}
+<link rel='stylesheet' href='{% static "css/profile.css" %}' />
+<link rel='stylesheet' href='{% static "css/style.css" %}' />
+{% endblock %}
+{% block forum %}
+<form method="POST" enctype="multipart/form-data">
+  {% csrf_token %}
+<div class="container box_1620">
+    <div class="banner_inner d-flex align-items-center">
+      <div class="banner_content">
+        <div class="media">
+          <div class="d-flex" style="padding-right:70px;">
+            {% load static %}
+            {% if profile_picture == '' %}
+              <img src="{% static 'profile/empty.png' %}" alt="" style="height:500px;width:500px;">
+            {% else %}
+              <img src="{% static 'profile/empty.png' %}" alt="" style="height:500px;width:500px;border-radius:250px;">
+            {% endif %}
+          </div>
+          <div class="media-body">
+            <div class="personal_text">
+              <br><br>
+              <p style="font-size:45px"><b>Personal Details</b></p>
+              <p style="font-size:20px">Name:  <input type="text" name="Name" value="{{name}}"></p>
+              <p style="font-size:20px">Username:  <input type="text" name="username" value="{{username}}"></p>
+              {% if gender == 'm' %}
+                <p style="font-size:20px">Gender:  Male</p>
+              {% elif gender == 'f' %}
+                <p style="font-size:20px">Gender:  Female</p>
+              {% else %}
+                <p style="font-size:20px">Gender:  Other</p>
+              {% endif %}
+              <p style="font-size:20px">Mobile:  <input type="text" name="Mobile" value="{{mobile}}"></p>
+              <p style="font-size:20px">Email:  <input type="text" name="Email" value="{{email}}"></p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <div style="padding-left:100px">
+          <input type="file" name="file1">
+          <input class="btn example_e" type="submit" name='image_upload' value='Submit'>
+    </div>
+    </div>
+  </form>
+{% endblock %}

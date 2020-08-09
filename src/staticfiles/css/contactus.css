@@ -1,0 +1,127 @@
+body {
+  padding: 0px;
+  margin: 0px;
+  font-family: sans-serif;
+}
+.container {
+  width: 90%;
+  margin: auto;
+  overflow: hidden;
+}
+#contact-section {
+  background: linear-gradient(rgba(256, 256, 256, 0.6), rgba(0, 0, 0, 0.6));
+  display: flex;
+  /* background: url(woman-wearing-white-v-neck-shirt-using-space-gray-iphone-6-225232.jpg); */
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-position: center;
+  height: 100%;
+  width: 100%;
+  padding-bottom: 2%;
+}
+#contact-section .container h2 {
+  text-align: center;
+  text-decoration: underline;
+  text-underline-position: under;
+  /* color: rgb(0, 0, 0); */
+  letter-spacing: 2px;
+}
+#contact-section .container p {
+  text-align: center;
+  width: 70%;
+  margin-left: auto;
+  margin-right: auto;
+  padding-bottom: 3%;
+  /* color: rgb(0, 0, 0); */
+  letter-spacing: 3px;
+}
+.fg {
+  height: 400px;
+  width: 400px;
+}
+.contact-form i.fa {
+  font-size: 22px;
+  padding: 3%;
+  background-color: none;
+  margin: 2%;
+  border-radius: 50%;
+  cursor: pointer;
+  border: 2px solid rgb(41, 6, 6);
+  color: rgb(34, 5, 5);
+}
+.contact-form i.fa:hover {
+  cursor: pointer;
+  /* border: 2px solid #000; */
+  color: #000;
+}
+.contact-form {
+  display: grid;
+  grid-template-columns: auto auto;
+}
+.form-info {
+  font-size: 16px;
+  font-style: italic;
+  color: #000;
+  letter-spacing: 2px;
+}
+.cinput{
+  padding: 10px;
+  margin: 10px;
+  width: 70%;
+  background-color: rgba(136, 133, 133, 0.5);
+  color: #fff;
+  /* border: none; */
+  outline: none;
+}
+.cinput::placeholder {
+  color: #fff;
+}
+.ctextarea {
+  font-family: sans-serif;
+  padding: 10px;
+  margin: 10px;
+  width: 70%;
+  background-color: rgba(136, 133, 133, 0.5);
+  color: #fff;
+  /* border: none; */
+  outline: none;
+}
+.ctextarea::placeholder {
+  color: #fff;
+} 
+.csubmit {
+  width: 67.5%;
+  background-color: white;
+  padding: 4px;
+  outline: none;
+  font-size: 13px;
+  font-weight: bold;
+  letter-spacing: 2px;
+  height: 33px;
+  text-align: center;
+  cursor: pointer;
+  margin-left: 3%;
+  border: 2px solid rgb(190, 190, 190);
+  color: rgb(116, 114, 114);
+}
+.csubmit:hover {
+  border: 1px solid #fff;
+  color: rgb(8, 8, 8);
+  cursor: pointer;
+} 
+@media (max-width: 768px) {
+  #contact-section .contact-form {
+    display: flex;
+    width: 100%;
+    text-align: center;
+  }
+  #contact-section .container h2 {
+    color: rgb(14, 90, 167);
+  }
+  #contact-section .container p {
+    color: rgb(14, 90, 167);
+  }
+  #contact-section .submit {
+    width: 70%;
+  }
+}

@@ -1,0 +1,102 @@
+{% extends 'forum/forum_base.html' %}
+{% load staticfiles %}
+{% load crispy_forms_tags %}
+{% block title %}Profile{% endblock %}
+{% block head %}
+<link rel='stylesheet' href='{% static "css/profile.css" %}' />
+<link rel='stylesheet' href='{% static "css/style.css" %}' />
+{% endblock %}
+{% block forum %}
+<script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
+<br><br>
+<div class="container box_1620">
+    <div class="banner_inner d-flex align-items-center">
+      <div class="banner_content">
+        <div class="media row">
+          <div class="d-flex col-sm-6" style="padding-right:70px;">
+            {% load static %}
+            {% if object.profile_picture %}
+              <img class="rounded mx-auto d-block" src="{{object.profile_picture.url }}" alt="" style="height:400px;width:400px;">
+            {% else %}
+              <img class="rounded mx-auto d-block" src="{% static 'profile/empty.png' %}" alt="" style="height:400px;width:400px;border-radius:250px;">
+            {% endif %}
+          </div>
+          <div class="media-body col-sm-6">
+            <div class="personal_text">
+              {% if request.user == object.user %}
+              <div style="float:right">
+                  <a href="/profile/my-profile" data-toggle="tooltip" title="EDIT" role="button" aria-pressed="true"><i class="fas fa-edit"></i></a>
+              </div>
+              {% endif %}
+              <br><br>
+              <p style="font-size:45px"><b>Personal Details</b></p>
+              <p style="font-size:20px">Name: {{ object.name }}</p>
+              <p style="font-size:20px">Username: {{ object.user.username }}</p>
+              {% if object.gender == 'm' %}
+                <p style="font-size:20px">Gender:  Male</p>
+              {% elif object.gender == 'f' %}
+                <p style="font-size:20px">Gender:  Female</p>
+              {% else %}
+                <p style="font-size:20px">Gender:  Other</p>
+              {% endif %}
+              <p style="font-size:20px">D.O.B: {{ object.dob }}</p>
+              <p style="font-size:20px">Bio: {{ object.bio }}</p>
+              <p style="font-size:20px">Mobile: {{ object.phone }}</p>
+              <p style="font-size:20px">Email: {{ object.email }} </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+    <br><br>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
+      Sentiment Analysis on {{ object.user.username }} Comments
+  </button>
+  
+  <!-- Modal -->
+  <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+      <div class="modal-content">
+          <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Analysis on Commnets</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+          </button>
+          </div>
+          <div class="modal-body">
+            {% if found %}
+              <canvas id="myChart"></canvas>
+            {% else %}
+              <p>No comments Found</p>
+            {% endif %}
+          </div>
+          <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+          </div>
+      </div>
+      </div>
+  </div>
+  <script>
+    var ctx = document.getElementById('myChart').getContext('2d');
+    var chart = new Chart(ctx, {
+        // The type of chart we want to create
+        type: 'pie',
+    
+        // The data for our dataset
+        data: {
+            labels: [
+            'Positive',
+            'Negative',
+            'Neutral'
+            ],
+            datasets: [{
+                data: {{ data | safe }},
+                backgroundColor:['rgba(0, 255, 0, 0.6)','rgba(255, 0, 0, 0.6)','rgba(0, 0, 0, 0.1)']
+            }]
+        },
+    
+        // Configuration options go here
+        options: {}
+    });
+</script>
+{% endblock %}

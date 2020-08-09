@@ -15,6 +15,9 @@ gunicorn = "*"
 django-heroku = "*"
 dj-database-url = "*"
 psycopg2 = "*"
+nltk = "*"
+numpy = "*"
+pandas = "*"
 
 [requires]
 python_version = "3.6"

@@ -15,8 +15,9 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path,include
-from .views import (home_page)
+from .views import (home_page,contact)
 from django.conf import settings
+from feedback.views import feedback
 from search.views import search_views
 from Forum.views import create_post_view,my_post_view
 
@@ -24,8 +25,11 @@ urlpatterns = [
     path('',home_page),
     path('forum/',include('Forum.urls')),
     path('search/',search_views),
+    path('profile/',include('userpage.urls')),
     path('create-post',create_post_view),
     path('my-posts',my_post_view),
+    path('contactus/',contact),
+    path('feedback/',feedback),
     # path('post-create',create_post_view),
     path('admin/', admin.site.urls),
     path('accounts/', include('allauth.urls')),

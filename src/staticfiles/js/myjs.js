@@ -4,6 +4,6 @@ $(document).ready(function(){
         event.preventDefault();
         $(this).parent().next(".comment-reply").fadeToggle();
     })
-    $('.modal').modal('show');
+    $('#loginreq').modal('show');
     $('[data-toggle="tooltip"]').tooltip();
 })

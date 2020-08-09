@@ -5,8 +5,9 @@ from django.db.models.signals import pre_save
 from django.utils.text import slugify
 from comments.models import Comment
 from django.contrib.contenttypes.models import ContentType
+from userpage.models import User_detail
 
-User = settings.AUTH_USER_MODEL
+User = settings.AUTH_USER_MODEL  
 
 # Create your models here.
 class PostQuerySet(models.QuerySet):
@@ -51,6 +52,14 @@ class Post(models.Model):
     def get_delete_url(self):
         return f"{self.get_absolute_url()}/delete"
 
+    def get_profile_page(self):
+        obj=User_detail.objects.get(user=self.user)
+        return obj.get_profile_page()
+    
+    def get_profile_picture(self):
+        obj=User_detail.objects.get(user=self.user)
+        return obj.profile_picture.url
+
     @property
     def comments(self):
         instance = self
@@ -81,6 +90,10 @@ def pre_save_post_reciever(sender,instance,*args,**kwargs):
     print("Pre saves")
     if not instance.slug:
         instance.slug = create_slug(instance)
+
+# class Image(models.Model):
+#     img = models.ImageField(upload_to='images/')
+#     im_post = models.ForeignKey(Post,on_delete=models.CASCADE)
     
 
 pre_save.connect(pre_save_post_reciever,sender=Post)

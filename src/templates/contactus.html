@@ -1,0 +1,39 @@
+{% extends 'forum/forum_base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}{% endblock %}
+{% block forum %}
+<section id="contact-section">
+    <div class="container">
+      <br>
+      <h2>Contact Us</h2>
+      <p>Email us and keep upto date with our latest blogs</p>
+      <div class="contact-form row">
+        <!-- first grid setion -->
+        <div class="fg col-sm-6">
+          <i class="fa fa-map-marker"></i
+          ><span class="form-info">192 City Lucknow India </span><br />
+          <i class="fa fa-phone"></i
+          ><span class="form-info">Mobile No +91 8536545587 </span><br />
+          <i class="fa fa-envelope"></i
+          ><span class="form-info">sentimentblog@gmail.com </span>
+        </div>
+        <!--  second grid-->
+        <div class="col-sm-6">
+          <form method="POST" action="">
+            <input class="cinput" type="text" placeholder="Your Name" name="name" required />
+            <input class="cinput" type="Email" placeholder="Email" name="email" required />
+            <input class="cinput" type="text" placeholder="Subject" name="subject" required />
+            <textarea class="ctextarea"
+              name="message"
+              placeholder="Type your text here"
+              rows="5"
+              required
+            ></textarea>
+            <button type="submit" class="csubmit">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+  <br></br>
+{% endblock %}

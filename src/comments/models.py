@@ -2,6 +2,7 @@ from django.db import models
 from django.conf import settings
 from django.contrib.contenttypes.models import ContentType
 from django.contrib.contenttypes.fields import GenericForeignKey
+from userpage.models import User_detail
 
 # Create your models here.
 class CommentManager(models.Manager):
@@ -30,6 +31,15 @@ class Comment(models.Model):
     def children(self):
         child_qs = Comment.objects.filter(parent=self)
         return child_qs
+
+    def get_profile_page(self):
+        obj=User_detail.objects.get(user=self.user)
+        return obj.get_profile_page()
+    
+    def get_profile_picture(self):
+        obj=User_detail.objects.get(user=self.user)
+        return obj.profile_picture.url
+
 
     @property
     def is_parent(self):

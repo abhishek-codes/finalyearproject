@@ -1,0 +1,58 @@
+{% extends 'forum/forum_base.html' %}
+{% load crispy_forms_tags %}
+{% block title %}{% endblock %}
+{% block forum %}
+<section id="feedback-section">
+    <div class="container">
+      <br>
+      <h1>Feedback</h1>
+      <p>Provide us with your valuable feedback</p>
+      <div class="contact-form2">
+        <div>
+          <form action="" method="POST">
+            {% csrf_token %}
+            <input class="cinput" type="text" placeholder="Your Name" name='name' required />
+            <input class="cinput" type="email" placeholder="Email" name="email" required />
+            <h4>What would you tell your friends or colleagues about us?</h4>
+              <label for="bad" class="r">
+                <input type="radio" name="exp" id='bad' value="bad" />Bad
+              </label>
+              <label for="average" class="r">
+                <input type="radio" name="exp" id="average" value="average" />Average
+              </label>
+              <label for="good" class="r">
+                <input type="radio" name="exp" id="good" value="good" />Good
+              </label>
+              <label for="excellent" class="r">
+                <input type="radio" name="exp" id="excellent" value="excellent" />Excellent
+              </label>
+              <h4>
+                How likely would you be to recommend this website to a friend?
+              </h4>
+              <label for="very_likely" class="r">
+                <input type="radio" name="rec" id="very_likely" value="very_likely" />Very Likely
+              </label>
+              <label for="likely" class="r">
+                <input type="radio" name="rec" id="likely" value="likely" />Likely
+              </label>
+              <label for="not_recommend" class="r">
+                <input type="radio" name="rec" id="not_recommend" value="not_recommend" />
+                Not&nbspRecommend
+              </label>
+              <h4>
+                How could we make it easier to resolve your questions or
+                concerns?
+              </h4>
+              <textarea class="ctextarea"
+                name="message"
+                placeholder="Type your text here"
+                rows="5"
+                required
+              ></textarea>
+              <button type="submit" class="csubmit">Send Message</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </section>
+{% endblock %}

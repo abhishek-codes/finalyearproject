@@ -56,6 +56,8 @@ INSTALLED_APPS = [
     'Forum',
     'search',
     'comments',
+    'feedback',
+    'userpage',
 ]
 
 CRISPY_TEMPLATE_PACK = "bootstrap4"

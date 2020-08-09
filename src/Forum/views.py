@@ -7,6 +7,7 @@ from comments.forms import CommentForm
 from comments.models import Comment
 from django.contrib.contenttypes.models import ContentType
 from django.http import HttpResponseRedirect,HttpResponse,Http404
+from nltk.sentiment.vader import SentimentIntensityAnalyzer
 
 
 # Create your views here.
@@ -64,10 +65,31 @@ def detail_post_view(request,slug):
             messages.error(request,"Try Again")
         comment_form = CommentForm()
         return HttpResponseRedirect(obj.get_absolute_url())
+    l=[]
+    for c in comments:
+        l.append(c.content)
+        for i in c.children():
+            l.append(i.content)
+    sid = SentimentIntensityAnalyzer()
+    data=[0,0,0]
+    for i in l:
+        val = sid.polarity_scores(i).get('compound')
+        if val==0:
+            data[2]+=1
+        elif val>0:
+            data[0]+=1
+        else:
+            data[1]+=1
+    if l:
+        found=True
+    else:
+        found=False
     context = { 
         "post_detail" : obj,
         "comments" : comments,
         "comment_form" : comment_form,
+        "data":data,
+        "found":found
         }
     return render(request,template_name,context)
 

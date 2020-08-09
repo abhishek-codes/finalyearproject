@@ -1,16 +1,33 @@
 <!-- {% load static %} -->
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
-  <a class="navbar-brand" href="/forum"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTU72LgBbwMOftewbrX6nSfb_nZ66NeP5lmyyv0vBMzcbSjrRDX&usqp=CAU" height="40"></a>
+<nav class="navbar navbar-light bg-light">
+  <div style="float: left;">
+    <ul class="nav">
+      <li class="nav-item">
+        <a class="navbar-brand" href="/forum"><img src="https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTU72LgBbwMOftewbrX6nSfb_nZ66NeP5lmyyv0vBMzcbSjrRDX&usqp=CAU" height="40"></a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" href="/forum">Home</a>
+      </li>
+    </ul>
+  </div>
+<div style="float: right;">
 <ul class="nav">
-  <!-- <li class="nav-item">
-    <a class="nav-link active" href="/">Home</a>
-  </li> -->
-  <li class="nav-item">
-    <a class="nav-link" href="/forum">BLOG</a>
-  </li>
   {% if user.is_authenticated %}
   <li class="nav-item">
-    <a class="nav-link" href="/accounts/logout">Logout</a>
+  {% if user.get_profile_pic %}
+  <a href=""><img src="{{ user.get_profile_pic }}" alt="error" style="width:40px;height:40px;border-radius:20px;"></a>
+  {% else %}
+  <a href=""><img src="{% static 'profile/empty.png' %}" alt="" style="width:40px;height:40px;border-radius:20px;"></a>
+  {% endif %}
+  </li>
+  <li class="nav-item dropdown">
+    <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+      {{ user }}
+    </a>
+    <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+      <a class="dropdown-item" href="{{ user.get_user_profile }}"><i class="far fa-user"></i> My profile</a>
+      <a class="dropdown-item" href="/accounts/logout"><i class="fas fa-power-off"></i> Logout</a>
+    </div>
   </li>
   {% else %}
   <li class="nav-item">
@@ -21,4 +38,5 @@
   </li>
   {% endif %}
 </ul>
+</div>
 </nav>
