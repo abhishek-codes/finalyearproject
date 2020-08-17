@@ -1,7 +1,10 @@
 {% extends 'forum/forum_base.html' %}
 {% load crispy_forms_tags %}
-{% block title %}{% endblock %}
+{% block title %}Contact Us{% endblock %}
 {% block forum %}
+{% if messages %}
+ {% include 'messages.html' with toast_messages=messages %}
+{% endif %}
 <section id="contact-section">
     <div class="container">
       <br>
@@ -20,6 +23,7 @@
         <!--  second grid-->
         <div class="col-sm-6">
           <form method="POST" action="">
+            {% csrf_token %}
             <input class="cinput" type="text" placeholder="Your Name" name="name" required />
             <input class="cinput" type="Email" placeholder="Email" name="email" required />
             <input class="cinput" type="text" placeholder="Subject" name="subject" required />

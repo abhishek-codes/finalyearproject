@@ -31,11 +31,12 @@ DEBUG = int(os.environ.get('DEBUG', default=1))
 ALLOWED_HOSTS = ['*']
 
 #write email and password
-# EMAIL_USE_TLS = True
-# EMAIL_HOST = 'smtp.gmail.com'
-# EMAIL_HOST_USER = 'example@gmail.com'
-# EMAIL_HOST_PASSWORD = 'mypassword'
-# EMAIL_PORT = 587
+EMAIL_USE_TLS = True
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_HOST_USER = 'abhishek73knp@gmail.com'
+EMAIL_HOST_PASSWORD = 'Linux@9569'
+EMAIL_PORT = 587
 
 # Application definition
 

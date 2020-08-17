@@ -101,7 +101,7 @@ def edit_post_view(request,slug):
         messages.success(request,'Successfully Updated')
         return HttpResponseRedirect(obj.get_absolute_url())
     template_name = 'form.html'
-    context = {"form" : form}
+    context = {"form" : form,"title":"Create New Post" }
     return render(request,template_name,context)
 
 def delete_post_view(request,slug):
@@ -121,7 +121,7 @@ def create_post_view(request):
     if not request.user.is_authenticated:
         return render(request,'login_required.html')
     form = PostModelForm(request.POST or None,request.FILES or None)
-    context = {"form" : form }
+    context = {"form" : form,"title":"Create New Post" }
     if form.is_valid():
         obj = form.save(commit=False)
         # print("###object",obj,request.user)

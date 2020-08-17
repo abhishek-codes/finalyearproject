@@ -7,6 +7,9 @@
 <link rel='stylesheet' href='{% static "css/style.css" %}' />
 {% endblock %}
 {% block forum %}
+{% if messages %}
+ {% include 'messages.html' with toast_messages=messages %}
+{% endif %}
 <script src="https://cdn.jsdelivr.net/npm/chart.js@2.8.0/dist/Chart.min.js"></script>
 <br><br>
 <div class="container box_1620">
@@ -36,6 +39,8 @@
                 <p style="font-size:20px">Gender:  Male</p>
               {% elif object.gender == 'f' %}
                 <p style="font-size:20px">Gender:  Female</p>
+              {% elif object.gender == 'n' %}
+                <p style="font-size:20px">Gender:  Not specified</p>
               {% else %}
                 <p style="font-size:20px">Gender:  Other</p>
               {% endif %}
@@ -58,7 +63,7 @@
       <div class="modal-dialog" role="document">
       <div class="modal-content">
           <div class="modal-header">
-          <h5 class="modal-title" id="exampleModalLabel">Analysis on Commnets</h5>
+          <h5 class="modal-title" id="exampleModalLabel">Analysis on Comments</h5>
           <button type="button" class="close" data-dismiss="modal" aria-label="Close">
               <span aria-hidden="true">&times;</span>
           </button>

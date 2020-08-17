@@ -34,7 +34,7 @@
             <div class="modal-dialog" role="document">
             <div class="modal-content">
                 <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Analysis on Commnets</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Analysis on Comments</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -71,7 +71,7 @@
                 <h5 class="card-title"><a href="{{ comment.get_profile_page }}"><img src="{{comment.get_profile_picture}}" style="width:40px;height:40px;border-radius:20px;">{{ comment.user }}</a> | <small>{{ comment.timestamp|timesince }} ago</small></h5>
                 <p class="card-text">{{ comment.content }}</p>
                 {% if comment.user == request.user %}
-                <a href="{{ comment.get_delete_url }}" role="button" style="float: right;" aria-pressed="true"><i class="fas fa-trash"></i></a>
+                <a href="{{ comment.get_delete_url }}" data-toggle="tooltip" title="DELETE" role="button" style="float: right;" aria-pressed="true"><i class="fas fa-trash"></i></a>
                 {% endif %}
                 <p class="card-text">{% if comment.children.count > 0 %}{% if comment.children.count == 1 %}
                     1 Reply | {% else %}{{comment.children.count}} Replies | {% endif %}{% else %}No Reply | {% endif %}<a class='comment-reply-btn' href="">Reply</a></p>
@@ -82,7 +82,7 @@
                         <h5 class="card-title"><a href="{{ child.get_profile_page }}"><img src="{{child.get_profile_picture}}" style="width:40px;height:40px;border-radius:20px;">{{ child.user }}</a> | <small>{{ child.timestamp|timesince }} ago</small></h5>
                         <p class="card-text">{{ child.content }}</p>
                         {% if child.user == request.user %}
-                        <a href="{{ child.get_delete_url }}" role="button" style="float: right;" aria-pressed="true"><i class="fas fa-trash"></i></a>
+                        <a href="{{ child.get_delete_url }}" role="button" data-toggle="tooltip" title="DELETE" style="float: right;" aria-pressed="true"><i class="fas fa-trash"></i></a>
                         {% endif %}
                     </div>
                     {% endfor %}

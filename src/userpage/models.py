@@ -2,6 +2,7 @@ from django.db import models
 from django.contrib.auth.models import User
 from django.db.models.signals import post_save
 from django.utils.text import slugify
+from datetime import datetime
 
 # Create your models here.
 gender = (
@@ -15,14 +16,14 @@ class User_detail(models.Model):
     name = models.CharField(max_length=20)
     gender = models.CharField(max_length=6, choices=gender, default="Not Specified")
     phone = models.CharField(max_length=20)
-    dob = models.DateField(auto_now_add=True)
+    dob = models.DateField()
     email = models.EmailField()
     profile_picture = models.ImageField(upload_to='profile', blank=True)
     bio = models.TextField()
     slug = models.SlugField(unique=True)
     
     def __str__(self):
-        return self.email
+        return self.slug
     
     def get_profile_page(self):
         return f"/profile/{self.slug}"
@@ -30,8 +31,9 @@ class User_detail(models.Model):
 
 def get_profile_pic(self):
     obj=User_detail.objects.get(user=self)
-    # print(obj)
-    return obj.profile_picture.url
+    if obj.profile_picture:
+        return obj.profile_picture.url
+    return None
 
 def get_user_profile(self):
     obj=User_detail.objects.get(user=self)
@@ -47,9 +49,7 @@ def create_slug(instance,new_slug=None):
 
 def pre_save_post_reciever(sender,instance,created,*args,**kwargs):
     if created:
-        obj=User_detail.objects.create(user=instance)
+        obj=User_detail.objects.create(user=instance,name='',gender='n',phone='',dob=datetime.now(),bio='',slug=instance.username)
     print("Pre saves")
-    if not obj.slug:
-        obj.slug = create_slug(instance)
 
-# post_save.connect(pre_save_post_reciever,sender=User)
+post_save.connect(pre_save_post_reciever,sender=User)

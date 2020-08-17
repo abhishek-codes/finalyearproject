@@ -1,25 +1,21 @@
-from django.shortcuts import render,get_object_or_404
+from django.shortcuts import render,get_object_or_404,redirect
 from .models import User_detail
 from comments.models import Comment
+from django.contrib import messages
 from nltk.sentiment.vader import SentimentIntensityAnalyzer
+from .forms import UserPageForm
 
 # Create your views here.
 def my_profile(request):
-    # if not request.user.is_authenticated:
-    #     return render(request,'login_required.html')
-    # obj=User_detail.objects.filter(user=request.user)
-    # if not obj:
-    #     obj = User_detail.objects.create(user=request.user,email=user.email)
-    # context = {"object" : obj }
-    # if request.method == 'POST':
-    #     name = request.POST.get('name')
-    #     email = request.POST.get('email')
-    #     experience = request.POST.get('exp')
-    #     recommened = request.POST.get('rec')
-    #     msg = request.POST.get('message')
-    #     messages.success(request,'Successfully Created')
-    #     return redirect('/profile/my-profile')
-    return render(request,'profile.html')
+    obj = get_object_or_404(User_detail,user=request.user)
+    form = UserPageForm(request.POST or None,request.FILES or None,instance=obj)
+    if form.is_valid():
+        form.save()
+        messages.success(request,'Successfully Updated')
+        return redirect(f'/profile/{obj.slug}')
+    template_name = 'form.html'
+    context = {"form" : form,"title":"EDIT PROFILE"}
+    return render(request,template_name,context)
 
 def u_profile(request,slug):
     obj=get_object_or_404(User_detail,slug=slug)

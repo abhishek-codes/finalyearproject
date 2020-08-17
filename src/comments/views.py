@@ -7,18 +7,19 @@ from Forum.views import detail_post_view
 # Create your views here.
 
 def comment_delete(request,id):
-    # print(id)
+    print(id)
     # id = int(id)
     obj = get_object_or_404(Comment,id=id)
     template_name = 'delete.html'
     post_obj = None
     if request.method == 'POST':
         new_obj = obj
-        # print(Comment.get_content_type)
-        # print("##new_obj",new_obj,type(new_obj.content_type))
-        if obj.parent_id:
-            new_obj = get_object_or_404(Comment,id=obj.object_id)
-            print("####new_obj",new_obj)
+        print(Comment.get_content_type)
+        print("##new_obj",new_obj,type(new_obj.content_type))
+        print(obj.object_id,new_obj.object_id)
+        # if obj.parent_id:
+        #     new_obj = get_object_or_404(Comment,id=obj.object_id)
+        #     print("####new_obj",new_obj)
         post_obj = get_object_or_404(Post,id=new_obj.object_id)
         print("##post_obj",post_obj)
         obj.delete()

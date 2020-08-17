@@ -13,13 +13,6 @@
 <div style="float: right;">
 <ul class="nav">
   {% if user.is_authenticated %}
-  <li class="nav-item">
-  {% if user.get_profile_pic %}
-  <a href=""><img src="{{ user.get_profile_pic }}" alt="error" style="width:40px;height:40px;border-radius:20px;"></a>
-  {% else %}
-  <a href=""><img src="{% static 'profile/empty.png' %}" alt="" style="width:40px;height:40px;border-radius:20px;"></a>
-  {% endif %}
-  </li>
   <li class="nav-item dropdown">
     <a class="nav-link dropdown-toggle" href="" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
       {{ user }}
@@ -29,6 +22,13 @@
       <a class="dropdown-item" href="/accounts/logout"><i class="fas fa-power-off"></i> Logout</a>
     </div>
   </li>
+  <li class="nav-item">
+    {% if user.get_profile_pic %}
+    <a href=""><img src="{{ user.get_profile_pic }}" alt="error" style="width:40px;height:40px;border-radius:20px;"></a>
+    {% else %}
+    <a href=""><img src="{% static 'profile/empty.png' %}" alt="" style="width:40px;height:40px;border-radius:20px;"></a>
+    {% endif %}
+    </li>
   {% else %}
   <li class="nav-item">
     <a class="nav-link" href="/accounts/login">Login</a>

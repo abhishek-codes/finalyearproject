@@ -7,6 +7,8 @@ from django.core.mail import send_mail
 def home_page(request):
     # template_name = "home.html"
     # template_obj = get_template(template_name)
+    # print("##debug",request.user)
+    # print("##debug2",request.user.get_profile_pic())
     return redirect('/forum')
  
 def contact(request):
@@ -17,7 +19,7 @@ def contact(request):
         subject = request.POST.get('subject')
         msg = request.POST.get('message')
         message = "{0} \n\n form {1}".format(msg,name)
-        send_mail(subject,message,email,['abhishek73knp@gmail.com'])
+        send_mail(subject,message,email,['abhishek73knp@gmail.com'],fail_silently=False)
         messages.success(request,'Successfully Send')
         return redirect('/contactus')
     return render(request,template_name)
