@@ -9,6 +9,7 @@ https://docs.djangoproject.com/en/2.2/topics/settings/
 For the full list of settings and their values, see
 https://docs.djangoproject.com/en/2.2/ref/settings/
 """
+from secret_settings import *
 
 import os
 
@@ -20,7 +21,6 @@ BASE_DIR = os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 # See https://docs.djangoproject.com/en/2.2/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = '#52j&nkv(h)3fldm-8o^&oiqpuxq%aykw@q!gyo-n@v#-py!42'
 
 # SECURITY WARNING: don't run with debug turned on in production!
 # DEBUG = True
@@ -34,8 +34,8 @@ ALLOWED_HOSTS = ['*']
 EMAIL_USE_TLS = True
 EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
 EMAIL_HOST = 'smtp.gmail.com'
-EMAIL_HOST_USER = 'abhishek73knp@gmail.com'
-EMAIL_HOST_PASSWORD = 'Linux@9569'
+EMAIL_HOST_USER = 'Use email Id'
+EMAIL_HOST_PASSWORD = 'use Your password'
 EMAIL_PORT = 587
 
 # Application definition
